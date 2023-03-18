@@ -1,0 +1,77 @@
+<% layout('layouts/boilerplate')%> 
+
+<h1 class="text-center">Rent Computers</h1>
+
+<header class="d-flex justify-content-center py-3">
+<ul class="nav nav-pills">
+    <li class="nav-item"><a href="/RentComputers/" class="nav-link active" aria-current="page">Home</a></li>
+    <li class="nav-item"><a href="/RentComputers/new" class="nav-link">Add computer</a></li>
+    <li class="nav-item"><a href="/RentComputers/remove" class="nav-link">Remove computer</a></li>
+
+</ul>
+</header>
+
+<div class="container text-center">
+    <div class="row">
+      <div class="col">
+        <table class="table">
+            <thead>
+              <h2>In stock</h2>
+              <tr>
+                <th scope="col">inventoryID</th>
+                <th scope="col">year</th>
+                <th scope="col">name</th>
+                <th scope="col">errand number</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(let computer of rentComputer){ %> 
+                <% if(computer.status == false){ %> 
+                <form action="/RentComputers/<%=computer._id%>?_method=PUT" method="POST">
+                  
+                  <th scope="row"><%=computer.inventoryID%></th>
+                  <td><%=computer.year%></td>
+                  <td><input class="form-control" type="text" id="name" name="rentcomputers[name]" required></td>
+                  <td><input class="form-control" type="number" id="number" name="rentcomputers[errandNumber]" required></td>
+                  <td><input type="hidden" id="status" name="rentcomputers[status]" value="true" /></td>
+                  <td><button type="submit" class="btn btn-success btn-sm">></button></td>
+            </form>
+              </tr>
+                <% } %>
+              <% } %> 
+            </tbody>
+          </table>
+      </div>
+
+      <div class="col">
+        <table class="table">
+            <thead>
+              <h2>Out for rent</h2>
+              <tr>
+                <th scope="col">inventoryID</th>
+                <th scope="col">year</th>
+                <th scope="col">name</th>
+                <th scope="col">errand nummer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(let computer of rentComputer){ %>
+                <% if(computer.status == true){ %> 
+                  <form action="/RentComputers/<%=computer._id%>?_method=PUT" method="POST">
+              <tr>
+                <th scope="row"><%=computer.inventoryID %></th>
+                <td><%=computer.year%> </td>
+                <td><%=computer.name%> </td>
+                <td><%=computer.errandNumber%> </td>
+                <input type="hidden" id="status" name="rentcomputers[status]" value="false" />
+                <td>
+                  <button type="submit" class="btn btn-danger btn-sm">Return</button>
+                  </form>
+                </td>
+              </tr>
+              <% } %>
+              <% } %> 
+            </tbody>
+          </table>
+      </div>
+  </div>

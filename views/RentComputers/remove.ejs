@@ -1,0 +1,38 @@
+<% layout('layouts/boilerplate')%> 
+
+
+<h1 class="text-center">Lånedatorer</h1>
+
+<header class="d-flex justify-content-center py-3">
+<ul class="nav nav-pills">
+    <li class="nav-item"><a href="/RentComputers/" class="nav-link" aria-current="page">Hem</a></li>
+    <li class="nav-item"><a href="/RentComputers/new" class="nav-link">Lägg till ny dator</a></li>
+    <li class="nav-item"><a href="/RentComputers/remove" class="nav-link active">Ta bort dator</a></li>
+</ul>
+</header>
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Inventarie</th>
+                  <th scope="col">Årsmodell</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                <% for(let computer of rentComputer){ %> 
+                  <form action="/RentComputers/remove/<%=computer._id%>?_method=DELETE" method="POST">
+                    
+                    <th scope="row"><%=computer.inventoryID%></th>
+                    <td><%=computer.year%></td>
+                    <td><button type="submit" class="btn btn-danger">Ta bort</button></td>
+              </form>
+                </tr>
+                  <% } %>
+              </tbody>
+            </table>
+        </div>
+</div>

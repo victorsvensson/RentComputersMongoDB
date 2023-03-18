@@ -1,0 +1,30 @@
+<% layout('layouts/boilerplate')%> 
+
+
+<h1 class="text-center">Lånedatorer</h1>
+
+<header class="d-flex justify-content-center py-3">
+<ul class="nav nav-pills">
+    <li class="nav-item"><a href="/RentComputers/" class="nav-link" aria-current="page">Hem</a></li>
+    <li class="nav-item"><a href="/RentComputers/new" class="nav-link active">Lägg till ny dator</a></li>
+    <li class="nav-item"><a href="/RentComputers/remove" class="nav-link">Ta bort dator</a></li>
+</ul>
+</header>
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <form action="/RentComputers/new" method="POST">
+            <div class="mb-3">
+                <label class="form-label" for="name">Inventarienummer *</label>
+                <input class="form-control" type="text" id="name" name="inventoryID" required>
+                <label class="form-label" for="year">Årsmodell *</label>
+                <input class="form-control" type="number" id="year" name="year" required>
+                <input type="hidden" id="status" name="status" value="false" />
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success">Lägg till</button>
+                <a class="btn btn-danger" href="/RentComputers/" role="button">Avbryt</a>
+            </div>
+        </form>
+    </div>
+</div>
